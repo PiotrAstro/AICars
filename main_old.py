@@ -2,14 +2,14 @@ import math
 import pygame
 import sys
 
-from NeuralNetwork.PPO_implementation import PPO
+from NeuralNetwork.PPO_pytorch import PPO
 
 # Constants
 WIDTH, HEIGHT = 800, 800
 CAR_SIZE_X, CAR_SIZE_Y = 46, 27
 BORDER_COLOR = (255, 255, 255)
 STARTX, STARTY = 400, 730
-START_SPEED = 2
+START_SPEED = 1
 MAX_SPEED, MIN_SPEED = 10, 1
 SPEED_CHANGE = 1
 START_DIRECTION = math.radians(0)
@@ -21,10 +21,23 @@ class Car:
     def __init__(self):
         self.sprite = pygame.image.load('car.png').convert_alpha()
         self.sprite = pygame.transform.scale(self.sprite, (CAR_SIZE_X, CAR_SIZE_Y))
+        self.GENERATION = 1
+        self.rewards = []
+        self.best_reward = 0
         self.reset()
         self.PPO = PPO(1, DIRECTION_CHECK_NUMBER + 1, 3)
 
     def reset(self):
+        print("g." + str(self.GENERATION))
+        self.GENERATION += 1
+        sum_of_rewards = sum(self.rewards)
+
+        print("\tsum of rewards: " + str(sum_of_rewards))
+        print("\tbest reward: " + str(self.best_reward))
+
+        if sum_of_rewards > self.best_reward:
+            self.best_reward = sum_of_rewards
+
         self.position = [STARTX, STARTY]
         self.direction = START_DIRECTION
         self.speed = START_SPEED
@@ -48,7 +61,7 @@ class Car:
         if self.next_state is None:
             self.next_state = self.create_state(game_map)
         self.states.append(self.next_state)
-        action = self.PPO.get_action(self.next_state)
+        action = self.PPO.get_action_probs(self.next_state).argmax()
         self.actions.append(action)
 
         self.use_action(action)

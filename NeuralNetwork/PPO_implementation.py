@@ -62,7 +62,7 @@ class PPO:
         probs = Dense(self.action_dim, activation='softmax')(x)
 
         actor = Model(inputs=[self._states_input, self._advantage_input, self._old_prediction_input], outputs=[probs])
-        actor.compile(loss=self.actor_loss(self._advantage_input, self._old_prediction_input), optimizer=tf.optimizers.Adam(lr=self.actor_learning_rate))
+        actor.compile(loss=self.actor_loss(self._advantage_input, self._old_prediction_input), optimizer=tf.keras.optimizers.legacy.Adam(lr=self.actor_learning_rate))
         #actor.summary()
         actor.fit([np.zeros((1, self.state_length, self.state_features)), np.zeros(1),
                   np.zeros((1, self.action_dim))], np.zeros((1, self.action_dim)),
@@ -87,7 +87,7 @@ class PPO:
         x = Flatten()(x)
         value = Dense(1)(x)
         critic = Model(inputs=[state], outputs=[value])
-        critic.compile(loss='mse', optimizer=tf.optimizers.Adam(lr=self.critic_learning_rate))
+        critic.compile(loss='mse', optimizer=tf.keras.optimizers.legacy.Adam(lr=self.critic_learning_rate))
         #critic.summary()
         critic.fit([np.zeros((1, self.state_length, self.state_features))], [np.zeros(1)],
                    verbose=0)  # optimizer has to initialise weights
@@ -144,10 +144,10 @@ class PPO:
     def ensure_loss(self, target_loss):
         if self.current_loss != target_loss:
             if target_loss == 'categorical_crossentropy':
-                self.actor.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.Adam(lr=self.actor_learning_rate))
+                self.actor.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(lr=self.actor_learning_rate))
             elif target_loss == 'actor_loss':
                 self.actor.compile(loss=self.actor_loss(self._advantage_input, self._old_prediction_input),
-                                   optimizer=tf.optimizers.Adam(lr=self.actor_learning_rate))
+                                   optimizer=tf.keras.optimizers.legacy.Adam(lr=self.actor_learning_rate))
             self.current_loss = target_loss
 
     def get_expected_rewards(self, states, rewards, use_last_value=True):

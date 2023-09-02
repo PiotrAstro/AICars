@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a694a90-05e5-4018-9dfd-e92c946c7bc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/NeuralNetwork/PPO_pytorch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AICars.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AICars.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeuralNetwork/Enviroment.py" beforeDir="false" afterPath="$PROJECT_DIR$/NeuralNetwork/Enviroment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeuralNetwork/Genetic_Reinforcement_Learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/NeuralNetwork/Genetic_Reinforcement_Learning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeuralNetwork/PPO_implementation.py" beforeDir="false" afterPath="$PROJECT_DIR$/NeuralNetwork/PPO_implementation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_old.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_old.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2SCSPTLFkPnrmHqvMamYKSDjOt6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,6 +45,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Krzysiek/anaconda3/condabin/conda.bat&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>

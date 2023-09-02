@@ -4,7 +4,7 @@ import sys
 
 from Car_AI.Car_Enviroment import Car_Enviroment
 from NeuralNetwork.Genetic_Reinforcement_Learning import Genetic_Reinforcement_Learning
-from NeuralNetwork.PPO_implementation import PPO
+from NeuralNetwork.PPO_pytorch import PPO
 
 # Constants
 WIDTH, HEIGHT = 800, 800
@@ -43,7 +43,7 @@ class Car:
 
     def step(self):
         state = self.enviroment.get_state()
-        action = self.RNN.get_action(state)
+        action = self.RNN.get_action_probs(state).argmax()
         self.enviroment.react_to_action(action)
         self.alive = self.enviroment.is_alive()
 
@@ -59,7 +59,7 @@ enviroment = Car_Enviroment(
                  CAR_SIZE_X=46, CAR_SIZE_Y=27,
                  BORDER_COLOR=(255, 255, 255),
                  STARTX=400, STARTY=730,
-                 START_SPEED=2,
+                 START_SPEED=1,
                  MAX_SPEED=10, MIN_SPEED=1,
                  SPEED_CHANGE=1,
                  START_DIRECTION=math.radians(0),
@@ -78,7 +78,7 @@ while True:
             sys.exit()
 
     # keys = pygame.key.get_pressed()
-    car.step( )
+    car.step()
     if not car.alive:
         car.reset()
         genetic_rl.run_generation()

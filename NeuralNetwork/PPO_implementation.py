@@ -10,9 +10,9 @@ disable_eager_execution()
 
 
 class PPO:
-    def __init__(self, state_length, state_features, action_dim, entropy_factor=0.01, epsilon=0.15,
-                 gamma=0.99, lamda_tradeof=0.95, actor_learning_rate=0.0003, critic_learning_rate=0.0003,
-                 actor_epochs=10, critic_epochs=10, batch_size=32):
+    def __init__(self, state_length, state_features, action_dim, entropy_factor=0.001, epsilon=0.1,
+                 gamma=0.8, lamda_tradeof=0.95, actor_learning_rate=0.0003, critic_learning_rate=0.0003,
+                 actor_epochs=8, critic_epochs=8, batch_size=128):
         self.state_length = state_length
         self.state_features = state_features
         self.action_dim = action_dim
@@ -119,6 +119,8 @@ class PPO:
 
         if advantages is None:
             advantages = self.get_Advantages(states, rewards)
+
+        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-10)
 
         actions_onehot = tf.keras.utils.to_categorical(actions_indexes, num_classes=self.action_dim, dtype=np.float32)
         actions_onehot = np.array(actions_onehot, dtype=np.float32)

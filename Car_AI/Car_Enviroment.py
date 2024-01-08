@@ -73,7 +73,7 @@ class Car_Enviroment(Abstract_Enviroment):
     def get_reward_car(self, game_map):
         if self.check_collision(game_map):
             self.alive = False
-            return -5
+            return -10
         else:
             self.next_state = self.create_state(game_map)
             minimum_distance = 100

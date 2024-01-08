@@ -1,8 +1,10 @@
 import math
+
+import numpy as np
 import pygame
 import sys
 
-from NeuralNetwork.PPO_pytorch import PPO
+from NeuralNetwork.PPO_implementation import PPO
 
 # Constants
 WIDTH, HEIGHT = 800, 800
@@ -61,7 +63,7 @@ class Car:
         if self.next_state is None:
             self.next_state = self.create_state(game_map)
         self.states.append(self.next_state)
-        action = self.PPO.get_action_probs(self.next_state).argmax()
+        action = self.PPO.get_action(self.next_state)
         self.actions.append(action)
 
         self.use_action(action)

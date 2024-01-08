@@ -10,8 +10,8 @@ disable_eager_execution()
 
 
 class PPO:
-    def __init__(self, state_length, state_features, action_dim, entropy_factor=0.01, epsilon=0.2,
-                 gamma=0.99, lamda_tradeof=0.95, actor_learning_rate=0.001, critic_learning_rate=0.002,
+    def __init__(self, state_length, state_features, action_dim, entropy_factor=0.01, epsilon=0.15,
+                 gamma=0.99, lamda_tradeof=0.95, actor_learning_rate=0.0003, critic_learning_rate=0.0003,
                  actor_epochs=10, critic_epochs=10, batch_size=32):
         self.state_length = state_length
         self.state_features = state_features
@@ -56,8 +56,8 @@ class PPO:
         self._advantage_input = Input(shape=(1,))
         self._old_prediction_input = Input(shape=(self.action_dim,))
 
-        x = Dense(64, activation='relu')(self._states_input)
-        x = Dense(32, activation='relu')(x)
+        x = Dense(128, activation='relu')(self._states_input)
+        x = Dense(128, activation='relu')(x)
         x = Flatten()(x)
         probs = Dense(self.action_dim, activation='softmax')(x)
 
@@ -82,8 +82,8 @@ class PPO:
 
     def build_critic(self):
         state = Input(shape=(self.state_length, self.state_features))
-        x = Dense(64, activation='relu')(state)
-        x = Dense(32, activation='relu')(x)
+        x = Dense(128, activation='relu')(state)
+        x = Dense(128, activation='relu')(x)
         x = Flatten()(x)
         value = Dense(1)(x)
         critic = Model(inputs=[state], outputs=[value])
